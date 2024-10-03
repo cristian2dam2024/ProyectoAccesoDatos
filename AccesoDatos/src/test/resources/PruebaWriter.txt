@@ -1,0 +1,11 @@
+
+Numero de Aes: 3
+Numero de Es: 4
+Numero de Ies: 5
+Numero de Oes: 5
+Numero de Ues: 6
+Numero de Aes: 3
+Numero de Es: 4
+Numero de Ies: 5
+Numero de Oes: 5
+Numero de Ues: 6
