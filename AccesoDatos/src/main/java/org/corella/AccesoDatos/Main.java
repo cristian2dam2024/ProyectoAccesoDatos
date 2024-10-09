@@ -5,16 +5,17 @@ import org.corella.AccesoDatos.claseFile.FuncionesDirectorio;
 import org.corella.AccesoDatos.claseFile.ManejoCSV;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //PruebaDirectorio();
         //PruebaReaderWriter();
         PruebaCSV();
     }
 
-    private static void PruebaCSV(){
+    private static void PruebaCSV() throws IOException {
         try {
             ManejoCSV tester = new ManejoCSV();
             tester.run("src/main/resources/alumnos.csv");

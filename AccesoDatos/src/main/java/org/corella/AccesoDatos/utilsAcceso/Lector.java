@@ -1,4 +1,4 @@
-package org.corella.AccesoDatos.utilsAccesoFichero;
+package org.corella.AccesoDatos.utilsAcceso;
 
 import java.io.BufferedReader;
 import java.io.File;

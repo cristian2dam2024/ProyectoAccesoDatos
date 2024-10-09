@@ -11,6 +11,22 @@ public class Alumno {
         this.curso = curso;
         this.edad = edad;
         this.nota = nota;
+
+    }
+
+    @Override
+    public String toString() {
+        return "Alumno{" +
+                "nombre='" + nombre + '\'' +
+                ", curso='" + curso + '\'' +
+                ", edad=" + edad +
+                ", nota=" + nota +
+                '}';
+    }
+
+    public String toStringCSV() {
+        return
+                nombre + "," + curso + "," + edad + "," + nota +"\n";
     }
 
     public Alumno(String[] campos){
