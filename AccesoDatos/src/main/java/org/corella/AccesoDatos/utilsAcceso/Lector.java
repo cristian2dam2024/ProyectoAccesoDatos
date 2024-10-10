@@ -1,11 +1,12 @@
 package org.corella.AccesoDatos.utilsAcceso;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 
 public class Lector {
+
+    public FileInputStream lectorBytes (String ruta) throws FileNotFoundException {
+        return new FileInputStream(new File(ruta));
+    }
 
     public FileReader lectorCaracteres(File rutaFichero) throws FileNotFoundException {
         return new FileReader(rutaFichero);

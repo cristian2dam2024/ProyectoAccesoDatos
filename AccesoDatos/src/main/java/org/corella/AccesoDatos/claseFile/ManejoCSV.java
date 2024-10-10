@@ -13,7 +13,7 @@ import java.util.Comparator;
 public class ManejoCSV {
 
     private void exportarAlumno(Alumno alumno) throws IOException {
-        File rutaFichero = new File(Constantes.rutaSalidaFicheroCSV + "alumnosOut.CSV");
+        File rutaFichero = new File(Constantes.resourcesDir + "alumnosOut.CSV");
         BufferedWriter escritor = new Escritor().escritorLineas(rutaFichero);
         escritor.write(alumno.toStringCSV());
         escritor.close();

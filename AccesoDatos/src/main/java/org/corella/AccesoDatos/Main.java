@@ -2,6 +2,7 @@ package org.corella.AccesoDatos;
 
 import org.corella.AccesoDatos.claseFile.FileReaderWriter;
 import org.corella.AccesoDatos.claseFile.FuncionesDirectorio;
+import org.corella.AccesoDatos.claseFile.LeerEscribirObjetos;
 import org.corella.AccesoDatos.claseFile.ManejoCSV;
 
 import java.io.FileNotFoundException;
@@ -12,7 +13,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
         //PruebaDirectorio();
         //PruebaReaderWriter();
-        PruebaCSV();
+        //PruebaCSV();
+        PruebaIOStream();
+
+    }
+
+    private static void PruebaIOStream() throws IOException {
+        LeerEscribirObjetos IOStreamTester = new LeerEscribirObjetos();
+        IOStreamTester.run();
     }
 
     private static void PruebaCSV() throws IOException {
