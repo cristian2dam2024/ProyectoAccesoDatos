@@ -1,9 +1,10 @@
 package org.corella.AccesoDatos;
 
-import org.corella.AccesoDatos.claseFile.FileReaderWriter;
-import org.corella.AccesoDatos.claseFile.FuncionesDirectorio;
-import org.corella.AccesoDatos.claseFile.LeerEscribirObjetos;
-import org.corella.AccesoDatos.claseFile.ManejoCSV;
+import org.corella.AccesoDatos.aplications.FileReaderWriter;
+import org.corella.AccesoDatos.aplications.FuncionesDirectorio;
+import org.corella.AccesoDatos.aplications.LeerEscribirObjetos;
+import org.corella.AccesoDatos.aplications.ManejoCSV;
+import org.corella.AccesoDatos.utilsAcceso.Constantes;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,8 +14,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         //PruebaDirectorio();
         //PruebaReaderWriter();
-        //PruebaCSV();
-        PruebaIOStream();
+        PruebaCSV();
+        //PruebaIOStream();
 
     }
 
@@ -33,8 +34,8 @@ public class Main {
     }
 
     private static void PruebaReaderWriter() {
-        FileReaderWriter frw = new FileReaderWriter("src/test/resources/PruebaWriter.txt");
-        frw.run("src/test/resources/PruebaReader.txt");
+        FileReaderWriter frw = new FileReaderWriter(Constantes.rutaFicheroSalidaContarVocales);
+        frw.run(Constantes.rutaFicheroVocales);
     }
 
 

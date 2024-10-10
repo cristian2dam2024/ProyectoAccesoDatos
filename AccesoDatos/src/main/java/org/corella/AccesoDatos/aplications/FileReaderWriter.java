@@ -1,4 +1,4 @@
-package org.corella.AccesoDatos.claseFile;
+package org.corella.AccesoDatos.aplications;
 
 import java.io.*;
 
@@ -15,7 +15,6 @@ public class FileReaderWriter {
 
     public FileReaderWriter(String pathEscritura) {
         this.pathEscritura = pathEscritura;
-        this.run("src/test/resources/PruebaReader.txt");
     }
 
     private void escribirContadores(String rutaEscritura, String contenido) throws IOException {
