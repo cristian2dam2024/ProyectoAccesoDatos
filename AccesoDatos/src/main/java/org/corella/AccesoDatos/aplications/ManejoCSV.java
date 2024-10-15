@@ -1,4 +1,4 @@
-package org.corella.AccesoDatos.claseFile;
+package org.corella.AccesoDatos.aplications;
 
 import org.corella.AccesoDatos.entidades.Alumno;
 import org.corella.AccesoDatos.utilsAcceso.Escritor;
@@ -13,7 +13,7 @@ import java.util.Comparator;
 public class ManejoCSV {
 
     private void exportarAlumno(Alumno alumno) throws IOException {
-        File rutaFichero = new File(Constantes.rutaSalidaFicheroCSV + "alumnosOut.CSV");
+        File rutaFichero = new File(Constantes.rutaSalidaFicheroCSV);
         BufferedWriter escritor = new Escritor().escritorLineas(rutaFichero);
         escritor.write(alumno.toStringCSV());
         escritor.close();
@@ -44,24 +44,6 @@ public class ManejoCSV {
 
             patron = "[a-zA-Z ]+";
             if(!linea.matches(patron)) { linea = lectorLineas.readLine(); }
-
-            /*
-            for (String campo : campos) {
-                if(!campo.matches(patron)) {
-                    linea = lectorLineas.readLine();
-                    break;
-                }
-            }
-            */
-
-            /*
-            try {
-                Integer.parseInt(campos[3]);
-            } catch (NumberFormatException e) {
-                //throw new RuntimeException(e);
-                System.out.println("Se omite la cabecera.");
-                linea = lectorLineas.readLine();
-            }*/
 
             do{
                 linea = linea.replaceAll(";$","");
