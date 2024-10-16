@@ -4,6 +4,7 @@ import org.corella.AccesoDatos.aplications.FileReaderWriter;
 import org.corella.AccesoDatos.aplications.FuncionesDirectorio;
 import org.corella.AccesoDatos.aplications.LeerEscribirObjetos;
 import org.corella.AccesoDatos.aplications.ManejoCSV;
+import org.corella.AccesoDatos.practicas.Practica1;
 import org.corella.AccesoDatos.utilsAcceso.Constantes;
 
 import java.io.FileNotFoundException;
@@ -14,8 +15,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
         //PruebaDirectorio();
         //PruebaReaderWriter();
-        PruebaCSV();
+        //PruebaCSV();
         //PruebaIOStream();
+        Practica1 practica1 = new Practica1();
+        practica1.run();
 
     }
 
