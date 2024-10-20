@@ -1,0 +1,18 @@
+
+0:	dni
+1:	numSegSocial
+2:	Nombre
+3:	Apellido1
+4:	Apellido2
+
+dirSocial
+5:	NombreCalle
+6:	numero
+7:	codigo postal
+8:	provincia
+
+dirFiscal
+9: 	nombrecalle
+10:	numero
+11:	codigopostal
+12:	provincia
