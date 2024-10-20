@@ -2,18 +2,21 @@ package org.corella.AccesoDatos.aplications;
 import java.io.File;
 import java.io.IOException;
 
-public class FuncionesDirectorio {
+public class FuncionesDirectorio{
 
-    public void run(String ruta) {
+    public void run(String ruta) throws IOException {
         File fichero = new File(ruta);
 
+
         if (!fichero.exists()) {
-            System.out.println("No existe el fichero");
+            System.out.println("No existe el fichero" + ruta);
+            System.out.println(" Ruta absoluta: "+fichero.getAbsolutePath());
+            System.out.println(" Ruta canonica: "+fichero.getCanonicalPath());
         } else {
             if (fichero.isFile()) {
                 System.out.println("La ruta " + ruta + " es un fichero.");
             } else {
-                //System.out.println("La ruta " + ruta + " es un directorio.");
+                System.out.println("La ruta " + ruta + " es un directorio.");
                 try {
                     listaDirectorio(fichero);
                 } catch (IOException e) {
