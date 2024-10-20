@@ -24,7 +24,7 @@ public class FicheroAccesoAleatorio {
         campos.add(new Pair<>("NACIONALIDAD", 20));
 
         try {
-            FicheroAccesoAleatorio escritor = new FicheroAccesoAleatorio("src/main/resources/ficheroRA.dat", campos);
+            FicheroAccesoAleatorio escritor = new FicheroAccesoAleatorio("AccesoDatos/src/main/resources/ficheroRA.dat", campos);
             Map registros = new HashMap();
 
             registros.put("DNI", "76546473H");
@@ -36,13 +36,13 @@ public class FicheroAccesoAleatorio {
             registros.put("DNI", "76000073H");
             registros.put("NOMBRE", "MARIA TERESA");
             registros.put("NACIONALIDAD", "FRANCIA");
-            escritor.insertar(registros, 1);
+            escritor.insertar(registros, 2);
 
             registros.clear();
             registros.put("DNI", "76000073H");
             registros.put("NOMBRE", "MARTIN");
             registros.put("NACIONALIDAD", "ALEMANIA");
-            escritor.insertar(registros, 1);
+            escritor.insertar(registros, 3);
 
 
         }catch (IOException e){
@@ -53,8 +53,12 @@ public class FicheroAccesoAleatorio {
 
     }
 
-    public FicheroAccesoAleatorio(String fileName, List<Pair<String, Integer>> fields) throws IOException {
-        this.campos = fields;
+    public FicheroAccesoAleatorio(){
+
+    }
+
+    public FicheroAccesoAleatorio(String fileName, List<Pair<String, Integer>> campos) throws IOException {
+        this.campos = campos;
         this.file = new File(fileName);
         longitudRegistro = 0;
 
@@ -64,6 +68,7 @@ public class FicheroAccesoAleatorio {
 
         if (file.exists()) {
             this.numeroRegistros = file.length() / this.longitudRegistro;
+            System.out.println("Numero de Registros: " + this.numeroRegistros);
         }
     }
 
@@ -73,7 +78,7 @@ public class FicheroAccesoAleatorio {
 
     public void insertar (Map<String, String> registro, long posicion)throws IOException{
         RandomAccessFile escritorAleatorio = new RandomAccessFile (file, "rws");
-        escritorAleatorio.seek(posicion *longitudRegistro);
+        escritorAleatorio.seek(posicion*longitudRegistro);
 
         for(Pair<String, Integer> campo : this.campos){
             String nombreCampo = campo.getKey();

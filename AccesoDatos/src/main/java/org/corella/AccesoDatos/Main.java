@@ -9,17 +9,17 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        //PruebaDirectorio();
+        PruebaDirectorio();
         //PruebaReaderWriter();
         //PruebaCSV();
         //PruebaIOStream();
 
-        PruebaAccesoAleatorio();
+        //PruebaAccesoAleatorio();
 
     }
 
     private static void PruebaAccesoAleatorio() throws IOException {
-        //FicheroAccesoAleatorio fa = new FicheroAccesoAleatorio();
+        new FicheroAccesoAleatorio().run();
     }
 
     private static void PruebaIOStream() throws IOException {
@@ -30,7 +30,7 @@ public class Main {
     private static void PruebaCSV() throws IOException {
         try {
             ManejoCSV tester = new ManejoCSV();
-            tester.run("src/main/resources/alumnos.csv");
+            tester.run(Constantes.listaAlumnos);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -42,11 +42,11 @@ public class Main {
     }
 
 
-    private static void PruebaDirectorio() {
+    private static void PruebaDirectorio() throws IOException {
         FuncionesDirectorio fd = new FuncionesDirectorio();
-        //fd.run("README.txt");
-        //fd.run("pom.xml");
-        //fd.run("target\\classes");
+        fd.run("README.txt");
+        fd.run("pom.xml");
+        fd.run("target\\classes");
         fd.run("src");
     }
 }
