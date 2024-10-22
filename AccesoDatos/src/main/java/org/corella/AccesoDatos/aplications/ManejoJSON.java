@@ -1,12 +1,119 @@
 package org.corella.AccesoDatos.aplications;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.*;
 
-public class ManejoJSON {
+
+public class ManejoJSON{
+
 
     public void run() throws IOException {
-        escribirJSON();
+
+        //escribirJSON();
+        serializedOrgJSON();
+        //writeJacksonJSON();
+        leerJacksonJSON();
+
+
     }
+
+    private void serializedOrgJSON() throws IOException {
+        Writer demoJSON = new StringWriter();
+        JSONWriter writerJSON = new JSONWriter(demoJSON);
+
+        writerJSON.object();
+        writerJSON.key("Nombre").value("Andreia");
+        writerJSON.key("Edad").value(20);
+        writerJSON.key("Titula").value(true);
+
+        writerJSON.key("AsignaturasSuperadas");
+        writerJSON.array();
+        writerJSON.value("Bases de datos");
+        writerJSON.value("Programacion");
+        writerJSON.value("Entornos");
+        writerJSON.value("Acceso a datos");
+        writerJSON.value("Ingés");
+
+        writerJSON.endArray();
+        writerJSON.endObject();
+
+        System.out.println(demoJSON);
+    }
+
+
+    private void leerJacksonJSON() throws IOException {
+        ObjectMapper mapeoObjeto = new ObjectMapper();
+        File fichero = new File("AccesoDatos/src/main/resources/FicheroOutAlumnos.json");
+        Alumno alumno = mapeoObjeto.readValue(fichero, Alumno.class);
+        System.out.println(alumno.getNombre());
+
+    }
+
+    private void writeJacksonJSON() throws IOException {
+        ObjectMapper mapeoObjeto = new ObjectMapper();
+        ArrayList asignaturasSuperadas = new ArrayList();
+        asignaturasSuperadas.add("Acceso a datos");
+        asignaturasSuperadas.add("Entornos");
+        asignaturasSuperadas.add("Programacion");
+
+        Alumno alumno = new Alumno("",20,false, asignaturasSuperadas);
+        mapeoObjeto.writeValue(new File("AccesoDatos/src/main/resources/FicheroOutAlumnos.json"), alumno);
+
+    }
+
+    static class Alumno implements Serializable {
+        private String nombre;
+        private int edad;
+        private boolean titula;
+        private ArrayList<String> asignaturasSuperadas;
+
+        public Alumno() {
+        }
+
+        public Alumno(String nombre, int edad, boolean titula, ArrayList<String> asignaturasSuperadas) {
+            this.nombre = nombre;
+            this.edad = edad;
+            this.titula = titula;
+            this.asignaturasSuperadas = asignaturasSuperadas;
+        }
+
+        public String getNombre() {
+            return nombre;
+        }
+
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
+
+        public int getEdad() {
+            return edad;
+        }
+
+        public void setEdad(int edad) {
+            this.edad = edad;
+        }
+
+        public boolean isTitula() {
+            return titula;
+        }
+
+        public void setTitula(boolean titula) {
+            this.titula = titula;
+        }
+
+        public ArrayList<String> getAsignaturasSuperadas() {
+            return asignaturasSuperadas;
+        }
+
+        public void setAsignaturasSuperadas(ArrayList<String> asignaturasSuperadas) {
+            this.asignaturasSuperadas = asignaturasSuperadas;
+        }
+    }
+
+
 
     private void escribirJSON() throws IOException {
 
