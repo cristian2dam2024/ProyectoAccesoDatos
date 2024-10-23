@@ -9,13 +9,19 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        PruebaDirectorio();
+        //PruebaDirectorio();
         //PruebaReaderWriter();
         //PruebaCSV();
         //PruebaIOStream();
 
         //PruebaAccesoAleatorio();
+        PruebaJSON();
 
+
+    }
+
+    private static void PruebaJSON() throws IOException {
+        new ManejoJSON().run();
     }
 
     private static void PruebaAccesoAleatorio() throws IOException {
