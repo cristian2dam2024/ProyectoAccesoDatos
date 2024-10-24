@@ -13,8 +13,9 @@ public class Main {
         //PruebaReaderWriter();
         //PruebaCSV();
         //PruebaIOStream();
-
         //PruebaAccesoAleatorio();
+
+        new ManejoXML().run();
 
     }
 
