@@ -14,8 +14,11 @@ public class Constantes {
     public static String rutaSalidaFicheroTipos = res + "rutaSalidaFicheroTipos";
 
     // Practica 2
-    public static String ficheroPersonas = "practica2/datosEntrada/personas.csv";
-    public static String datosBancarios = "practica2/datosEntrada/datosBancarios.csv";
+    public static String practica2_ficheroPersonas = res + "practica2/datosEntrada/personas.csv";
+    public static String practica2_datosBancarios = res + "practica2/datosEntrada/datosBancarios.csv";
+
+    public static String practica2_salidaDatosGenerales = res + "practica2/datosSalida/datosGenerales.dat";
+    public static String practica2_salidaDatosFiscales = res + "practica2/datosGenerales/datosFiscales.dat";
 
 
 

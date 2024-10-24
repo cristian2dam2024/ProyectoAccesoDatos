@@ -1,6 +1,8 @@
 package org.corella.AccesoDatos.entidades.practica2;
 
-public class Direccion {
+import java.io.Serializable;
+
+public class Direccion implements Serializable {
 
     private String nombreCalle;
     private int numero;

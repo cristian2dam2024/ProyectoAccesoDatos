@@ -1,0 +1,9 @@
+
+0:	dni
+1:	numero de cuenta (sin codigo de provincia)
+2:	%irpf
+3:	balance
+
+4:	aportacionesONG
+5:  aportacionesFPFI
+6:	tipo de inversion (String)

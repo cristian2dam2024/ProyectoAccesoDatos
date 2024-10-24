@@ -4,6 +4,14 @@ import java.io.*;
 
 public class Escritor {
 
+    public RandomAccessFile escritorAleatorio (String ruta) throws FileNotFoundException {
+        return new RandomAccessFile(ruta, "rw");
+    }
+
+    public ObjectOutputStream escritorObjetos(String ruta) throws IOException {
+        return new ObjectOutputStream(new FileOutputStream(new File("ruta")));
+    }
+
     public DataOutputStream escritorTipos(String ruta) throws IOException {
         return new DataOutputStream(escritorBytes(ruta));
     }
