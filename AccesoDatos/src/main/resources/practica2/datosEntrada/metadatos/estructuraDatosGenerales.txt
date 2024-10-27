@@ -1,6 +1,6 @@
 
-0:	dni
-1:	numSegSocial (sin codigo de provincia)
+0:	dni (4)
+1:	numSegSocial (sin codigo de provincia) ()
 2:	Nombre
 3:	Apellido1
 4:	Apellido2

@@ -1,6 +1,7 @@
 package org.corella.AccesoDatos.entidades.practica2;
 
 import java.io.Serializable;
+import java.util.Map;
 
 public class Persona implements Serializable {
 
@@ -22,6 +23,8 @@ public class Persona implements Serializable {
         this.direccionSocial = new Direccion(datosPersona[5],datosPersona[6],datosPersona[7],datosPersona[8]);
         this.direccionFiscal = new DirFiscal(datosPersona[9],datosPersona[10],datosPersona[11],datosPersona[12]);
         // Estructura de datos en AccesoDatos/src/main/resources/practica2/datosEntrada/estructuraDatosGenerales.txt
+
+
     }
 
 

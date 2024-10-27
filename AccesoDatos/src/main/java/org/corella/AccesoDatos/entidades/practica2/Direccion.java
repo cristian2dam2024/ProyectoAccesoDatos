@@ -15,4 +15,20 @@ public class Direccion implements Serializable {
         this.codigoPostal =Integer.parseInt(numero);
         this.provincia = provincia;
     }
+
+    public String getNombreCalle() {
+        return nombreCalle;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public int getCodigoPostal() {
+        return codigoPostal;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
 }
