@@ -2,7 +2,8 @@ package org.corella.AccesoDatos;
 
 import org.corella.AccesoDatos.claseFile.FileReaderWriter;
 import org.corella.AccesoDatos.claseFile.FuncionesDirectorio;
-import org.corella.AccesoDatos.claseFile.ManejoCSV;
+
+import current.ManejoCSV;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
