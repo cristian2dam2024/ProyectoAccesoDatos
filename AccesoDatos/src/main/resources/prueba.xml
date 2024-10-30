@@ -1,23 +1,7 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.corella</groupId>
-  <artifactId>AccesoDatos</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>Archetype - AccesoDatos</name>
-  <url>http://maven.apache.org</url>
-    <dependencies>
-    </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>9</source>
-                    <target>9</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-</project>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE clientes SYSTEM "rutaFichero.dtd">
+<clientes>
+    <cliente DNI="123456789M">
+        <NOMBRE>Darío</NOMBRE>
+    </cliente>
+</clientes>

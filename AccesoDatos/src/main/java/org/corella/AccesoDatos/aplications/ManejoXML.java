@@ -2,6 +2,8 @@ package org.corella.AccesoDatos.aplications;
 import org.corella.AccesoDatos.utilsAcceso.Constantes;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.io.StringWriter;
 
@@ -22,23 +24,23 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.helpers.DefaultHandler;
 
 
 public class ManejoXML {
 
     private static final String INDENT_LEVEL = " ";
 
-    public void run(){
-
-        //Document documentoXML = leerXML(Constantes.pruebaxml);
-    	try {
-			escribirXML();
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    public void run() throws ParserConfigurationException{
+    	
+    	Document documentoXML = leerXML("AccesoDatos/src/main/resources/prueba.xml");
+    	//escribirXML();
 
     }
+    
+    
     
     private void escribirXML() throws ParserConfigurationException{
     	try {
@@ -69,15 +71,23 @@ public class ManejoXML {
 			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "clientes.dtd");
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 			
-		
+			//sacar salida por consola
 			StringWriter sw = new StringWriter();
 			StreamResult sr = new StreamResult(sw);
 			transformer.transform(domSource, sr);
-			
 			System.out.println(sw.toString());
+		
+			/*
+			//sacar salida a un fichero
+			FileWriter fw = new FileWriter("");
+			StreamResult sr2 = new StreamResult(fw);
+			transformer.transform(domSource, sr2);
+			fw.close();*/
 			
+
 			
 			
 		} catch (ParserConfigurationException parserException) {
@@ -92,7 +102,7 @@ public class ManejoXML {
 		} catch (TransformerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
     }
     
 
@@ -150,24 +160,39 @@ public class ManejoXML {
     }
 
     private Document leerXML (String rutaFichero){
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        //llama una clase que crea instancias pre construidas de otra clase
-        //documentbuilder() parsea el fichero y lo trae al codigo java
-        //set-get atributos() para manejar el factory
-
-        //dbf.setIgnoringComments(true);
-        //dbf.setIgnoringElementContentWhitespace(true);
+        //DocumentBuilderFactory dbf = ValidacionXML.validarXML();
+    	DocumentBuilderFactory dbf = ValidacionXML.validarXML(new File("AccesoDatos/src/main/resources/clientes.xsd"));
         Document documentoXML = null;
         try {
             DocumentBuilder builder = dbf.newDocumentBuilder();
-            documentoXML = builder.parse(new File(Constantes.pruebaxml));
-            muestraNodo(documentoXML, System.out, Constantes.pruebaxml.length());
+            builder.setErrorHandler(new GestorEventos());
+            documentoXML = builder.parse(new File(rutaFichero));
+            muestraNodo(documentoXML, System.out, rutaFichero.length());
         } catch (FileNotFoundException | ParserConfigurationException e){
             System.err.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    class GestorEventos extends DefaultHandler{
+    	
+    	@Override
+    	public void error(SAXParseException e) throws SAXException {
+    		// TODO Auto-generated method stub
+    		System.err.println("Error recuperable " + e.getMessage());
+    	}
+    	@Override
+    	public void fatalError(SAXParseException e) throws SAXException {
+    		// TODO Auto-generated method stub
+    		System.err.println("Error no recuperable " + e.getMessage());
+    	}
+    	@Override
+    	public void warning(SAXParseException e) throws SAXException {
+    		// TODO Auto-generated method stub
+    		System.err.println("Aviso: " + e.getMessage());
+    	}
     }
 
 }

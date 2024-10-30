@@ -1,0 +1,4 @@
+<!ELEMENT clientes (cliente+)>
+<!ELEMENT cliente (NOMBRE)>
+<!ATTLIST cliente DNI CDATA #REQUIRED>
+<!ELEMENT NOMBRE (#PCDATA)>
