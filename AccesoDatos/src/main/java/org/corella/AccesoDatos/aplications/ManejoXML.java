@@ -35,7 +35,7 @@ public class ManejoXML {
 
     public void run() throws ParserConfigurationException{
     	
-    	Document documentoXML = leerXML("AccesoDatos/src/main/resources/prueba.xml");
+    	Document documentoXML = leerXML("src/main/resources/prueba.xml");
     	//escribirXML();
 
     }
@@ -50,11 +50,11 @@ public class ManejoXML {
 			
 			documento.setXmlVersion("1.0");
 			
-			Element elementoClientes = documento.createElement("clientes");
-			documento.appendChild(elementoClientes); // está en la raiz del documento
+			Element elementoRaiz = documento.createElement("clientes");
+			documento.appendChild(elementoRaiz); // está en la raiz del documento
 			
 			Element elementoCliente = documento.createElement("cliente");
-			elementoClientes.appendChild(elementoCliente);
+			elementoRaiz.appendChild(elementoCliente);
 			
 			elementoCliente.setAttribute("DNI", "123456789M");
 			// ... todos los atributos que queramos 
@@ -111,7 +111,7 @@ public class ManejoXML {
         if(nodo.getNodeType() == Node.TEXT_NODE && nodo.getNodeValue().isEmpty()){
             return;
         }
-
+        
         for(int i = 0; i < nivel; i++){
             printStream.print(INDENT_LEVEL);
         }
@@ -124,31 +124,31 @@ public class ManejoXML {
                 Document doc = (Document) nodo;
                 printStream.println(
                         "Documento DOM, version: "+doc.getXmlVersion()+
-                        "\n codificación: " + doc.getXmlEncoding());
+                        "\t codificación: " + doc.getXmlEncoding());
 
                 break;
 
             case Node.ELEMENT_NODE:
-                printStream.println("<"+nodo.getNodeName()+">");
+            
+                printStream.print("ELEMENT_NODE: <"+nodo.getNodeName()+"> ");
+                
                 NamedNodeMap atributos = nodo.getAttributes();
-
                 for(int i = 0; i < atributos.getLength(); i++){
-
+                	
                     Node atributo = atributos.item(i);
-                    printStream.println(
+                    printStream.print(
                             " @ "+ atributo.getNodeName() + "["+ atributo.getNodeValue()+"]");
-
                 }
-                printStream.println("</"+nodo.getNodeName()+">");
+                printStream.println(" </"+nodo.getNodeName()+">");
 
                 break;
 
             case Node.TEXT_NODE:
-                printStream.println(nodo.getNodeName() + " ["+ nodo.getNodeValue()+"]");
+                printStream.print("TEXT_NODE: "+nodo.getNodeName() + " ["+ nodo.getNodeValue()+"]");
                 break;
 
             default:
-                printStream.println("nodo de tipo ("+ nodo.getNodeType() +")");
+                //printStream.println("nodo de tipo ("+ nodo.getNodeType() +")");
         }
 
         //recursivo para los nodos hijos del padre que le pasamos
@@ -160,14 +160,15 @@ public class ManejoXML {
     }
 
     private Document leerXML (String rutaFichero){
-        //DocumentBuilderFactory dbf = ValidacionXML.validarXML();
-    	DocumentBuilderFactory dbf = ValidacionXML.validarXML(new File("AccesoDatos/src/main/resources/clientes.xsd"));
+    	
         Document documentoXML = null;
         try {
+        	//DocumentBuilderFactory dbf = ValidacionXML.validarXML();
+        	DocumentBuilderFactory dbf = ValidacionXML.validarXML(new File("AccesoDatos/src/main/resources/clientes.xsd"));
             DocumentBuilder builder = dbf.newDocumentBuilder();
             builder.setErrorHandler(new GestorEventos());
             documentoXML = builder.parse(new File(rutaFichero));
-            muestraNodo(documentoXML, System.out, rutaFichero.length());
+            muestraNodo(documentoXML, System.out, 1);
         } catch (FileNotFoundException | ParserConfigurationException e){
             System.err.println(e.getMessage());
         } catch (Exception e) {
@@ -194,5 +195,7 @@ public class ManejoXML {
     		System.err.println("Aviso: " + e.getMessage());
     	}
     }
+    
+    // realizar comprobación con los ficheros del aulavirtual
 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE clientes SYSTEM "rutaFichero.dtd">
+<!DOCTYPE clientes SYSTEM "clientes.dtd">
 <clientes>
     <cliente DNI="123456789M">
         <NOMBRE>Darío</NOMBRE>
