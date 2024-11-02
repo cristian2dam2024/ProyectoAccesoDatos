@@ -2,7 +2,7 @@ package org.corella.AccesoDatos.utilsAcceso;
 
 public class Constantes {
 
-    private static String res = "AccesoDatos/src/main/resources/";
+    private static String res = "src/main/resources/";
 
     public static String rutaFicheroVocales = res + "PruebaReader.txt";
     public static String rutaFicheroSalidaContarVocales = res + "PruebaWriter.txt";
@@ -16,6 +16,9 @@ public class Constantes {
     // Practica 2
     public static String practica2_estructuraBytesDatosGenerales = res + "practica2/datosEntrada/metadatos/bytesDatosGenerales.txt";
     public static String practica2_estructuraBytesDatosFiscales = res + "practica2/datosEntrada/metadatos/bytesDatosFiscales.txt";
+
+    public static String practica2_posicionesEscrituraGenerales = res + "practica2/datosEntrada/metadatos/posicionesEscrituraDatosGenerales.txt";
+    public static String practica2_posicionesEscrituraFiscales = res + "practica2/datosEntrada/metadatos/posicionesEscrituraDatosFiscales.txt";
 
     public static String practica2_ficheroPersonas = res + "practica2/datosEntrada/personas.csv";
     public static String practica2_datosFiscales = res + "practica2/datosEntrada/datosFiscales.csv";

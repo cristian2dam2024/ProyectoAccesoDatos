@@ -1,0 +1,4 @@
+Madrid:0
+Sevilla:11
+Barcelona:21
+Zaragoza:31

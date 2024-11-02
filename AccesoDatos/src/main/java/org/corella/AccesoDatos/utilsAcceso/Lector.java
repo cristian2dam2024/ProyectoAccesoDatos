@@ -17,18 +17,26 @@ public class Lector {
         return new BufferedReader(new FileReader(rutaFichero));
     }
 
-    public ArrayList<String []> getArrayDatos(String ficheroDatos, String separador) throws IOException {
-        ArrayList<String []> arrayCampos = new ArrayList<>();
-        BufferedReader lector = new Lector().lectorLineas(new File(ficheroDatos));
+    public ArrayList<String []> getArrayDatos(String rutaFichero, String separador) throws IOException {
+    	
+    	File fichero = new File(rutaFichero);
+    	
+    	if(fichero.exists()) {
+    		System.out.println("Encontrado fichero en la ruta: " + rutaFichero);
+    		ArrayList<String []> arrayCampos = new ArrayList<>();
+            BufferedReader lector = new Lector().lectorLineas(fichero);
 
-        String linea;
-        do{
-            linea = lector.readLine();
-            arrayCampos.add(linea.split(separador));
-        } while(linea != null);
-        lector.close();
+            String linea = "";
+            
+            while((linea = lector.readLine())!= null) {
+            	arrayCampos.add(linea.split(separador));
+            }
+            lector.close();
 
-        return arrayCampos;
+            return arrayCampos;
+    	}
+    	
+    	return null;
     }
 
 }
