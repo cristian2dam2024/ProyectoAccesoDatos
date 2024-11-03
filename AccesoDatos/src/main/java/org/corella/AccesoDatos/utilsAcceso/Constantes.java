@@ -14,6 +14,10 @@ public class Constantes {
     public static String rutaSalidaFicheroTipos = res + "rutaSalidaFicheroTipos";
 
     // Practica 2
+    
+    public static String practica2_ficheroConfiguracionGeneral = res + "practica2/datosEntrada/metadatos/deepData/configuracionGeneral.json";
+    public static String practica2_ficheroConfiguracionFiscal = res + "practica2/datosEntrada/metadatos/deepData/configuracionFiscal.json";
+    
     public static String practica2_estructuraBytesDatosGenerales = res + "practica2/datosEntrada/metadatos/bytesDatosGenerales.txt";
     public static String practica2_estructuraBytesDatosFiscales = res + "practica2/datosEntrada/metadatos/bytesDatosFiscales.txt";
 

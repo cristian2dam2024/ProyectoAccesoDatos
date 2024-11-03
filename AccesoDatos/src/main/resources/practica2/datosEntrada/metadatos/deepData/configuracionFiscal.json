@@ -1,0 +1,9 @@
+{
+	"rutaFicheroPosiciones":"src/main/resources/practica2/datosEntrada/metadatos/posicionesEscrituraDatosFiscales.txt",
+	"rutaFicheroDatos":"src/main/resources/practica2/datosEntrada/datosFiscales.csv",
+	"rutaLongitudRegistros":"src/main/resources/practica2/datosEntrada/metadatos/bytesDatosFiscales.txt",
+	"rutaFicheroSalida":"src/main/resources/practica2/datosSalida/datosFiscales.dat",
+	"tamanioTotalRegistros":"55",
+	"criterioOrden":"IRPF"
+
+}
