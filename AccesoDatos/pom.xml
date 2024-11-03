@@ -9,6 +9,12 @@
   
   <repositories>
    <repository>
+      <id>Central Repository</id>
+      <name>Central Repository</name>
+      <url>https://repo1.maven.org/maven2/</url>
+    </repository>
+    
+    <repository>
       <id>ICM Repository</id>
       <name>ICM Repository</name>
       <url>https://maven.icm.edu.pl/artifactory/repo/</url>
@@ -34,6 +40,14 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.18.0</version>
 		</dependency>
+		<dependency>
+    <groupId>org.openjfx</groupId>
+    <artifactId>javafx-base</artifactId>
+    <version>24-ea+15</version>
+</dependency>
+
+		
+
 
 
     </dependencies>

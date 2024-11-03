@@ -4,9 +4,6 @@ import javafx.util.Pair;
 
 import org.corella.AccesoDatos.entidades.practica2.*;
 import org.corella.AccesoDatos.utilsAcceso.*;
-import org.json.JSONObject;
-
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,11 +31,13 @@ public class Practica2 {
 	}
 	
 	private Configuracion getObjetoConfig(File ficheroJSON) {
-
+		
 		try {
 			
 			ObjectMapper mapper = new ObjectMapper();
-			return mapper.readValue(ficheroJSON, Configuracion.class);
+			Configuracion config = mapper.readValue(ficheroJSON, Configuracion.class);
+			System.out.println("Se ha mapeado el objeto correctamente");
+			return config;
 			
 		} catch (StreamReadException e) {
 			// TODO Auto-generated catch block
@@ -80,10 +79,8 @@ public class Practica2 {
 				registro.put(clave, linea[i]);
 			}
 			
-			String clavePuntero = "";
-			long pointerPosition = getPosicionPuntero(mapPosiciones, config, registro, clavePuntero);
-			
-			mapPosiciones.replace(clavePuntero, (int)pointerPosition+1);
+			long pointerPosition = getPosicionPuntero(mapPosiciones, config, registro);
+			mapPosiciones.replace(config.getClavePuntero(), (int) (pointerPosition+1));
 			escritor.seek(pointerPosition*longitudTotalRegistro);
 			
 			for(Pair<String, Integer> guiaRegistro : guiaLongitudes){
@@ -97,12 +94,14 @@ public class Practica2 {
 	            String valorCampoForm = String.format("%1$-" + longitudCampo + "s", valorCampo +"s", valorCampo);
 	            escritor.write(valorCampoForm.getBytes("UTF-8"), 0, longitudCampo);
 	        }
+			System.out.println("Escrito registro de tipo [" + config.getTipo()+ "] en la posición "+ pointerPosition +" del fichero binario.");
+			System.out.println("Nueva posición del puntero con clave "+ config.getClavePuntero()+" : " + mapPosiciones.get(config.getClavePuntero()));
 			registro.clear();
 		}
 		escritor.close();
 	}
 
-	private long getPosicionPuntero(Map<String, Integer> mapPosiciones, Configuracion config, Map<String, String> registro, String clavePuntero) {
+	private long getPosicionPuntero(Map<String, Integer> mapPosiciones, Configuracion config, Map<String, String> registro) {
 		// TODO Auto-generated method stub
 		
 		String criterioOrden = config.getCriterioOrden();
@@ -112,17 +111,20 @@ public class Practica2 {
 			int porcentajeIRPF = Integer.parseInt(registro.get(criterioOrden));
 			
 			if(porcentajeIRPF <= 10) {
-				clavePuntero = "<=10";
+				
+				config.setClavePuntero("<=10");
 			} else if (porcentajeIRPF <= 15) {
-				clavePuntero = "<=15";
+				config.setClavePuntero("<=15");
 			} else {
-				clavePuntero = "else";
+				config.setClavePuntero("else");
 			}
-			
-			return mapPosiciones.get(clavePuntero);
+			return mapPosiciones.get(config.getClavePuntero());
 		}
 		
-		return mapPosiciones.get(config.getCriterioOrden());
+		String ciudad = registro.get(criterioOrden.toUpperCase());
+		config.setClavePuntero(ciudad);
+		
+		return mapPosiciones.get(registro.get(criterioOrden.toUpperCase()));
 	}
 
 	private List<Pair<String, Integer>> setListaPares(String rutaLongitudRegistros) {

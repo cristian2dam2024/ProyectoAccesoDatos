@@ -4,8 +4,13 @@ import java.io.Serializable;
 
 public class Configuracion implements Serializable{
 	
-	String rutaFicheroPosiciones, rutaFicheroDatos, rutaLongitudRegistros, rutaFicheroSalida, criterioOrden;
+	String rutaFicheroPosiciones, rutaFicheroDatos, rutaLongitudRegistros, rutaFicheroSalida, criterioOrden, tipo;
+	String clavePuntero = "";
 	int tamanioTotalRegistros;
+	
+	public Configuracion() {
+		super();
+	}
 	
 	public Configuracion(String rutaFicheroPosiciones, String rutaFicheroDatos, String criterioOrden,
 			int tamanioTotalRegistros) {
@@ -52,6 +57,19 @@ public class Configuracion implements Serializable{
 	public void setRutaFicheroSalida(String rutaFicheroSalida) {
 		this.rutaFicheroSalida = rutaFicheroSalida;
 	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	public String getClavePuntero() {
+		return clavePuntero;
+	}
+	public void setClavePuntero(String clavePuntero) {
+		this.clavePuntero = clavePuntero;
+	}
+	
 	
 	
 	

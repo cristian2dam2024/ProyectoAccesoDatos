@@ -4,6 +4,8 @@
 	"rutaLongitudRegistros":"src/main/resources/practica2/datosEntrada/metadatos/bytesDatosGenerales.txt",
 	"rutaFicheroSalida":"src/main/resources/practica2/datosSalida/datosGenerales.dat",
 	"tamanioTotalRegistros":"205",
-	"criterioOrden":"Provincia"
+	"criterioOrden":"Provincia",
+	"tipo":"general",
+	"clavePuntero":""
 
 }

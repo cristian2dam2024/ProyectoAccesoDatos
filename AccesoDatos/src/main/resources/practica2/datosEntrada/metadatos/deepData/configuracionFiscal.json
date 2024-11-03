@@ -4,6 +4,8 @@
 	"rutaLongitudRegistros":"src/main/resources/practica2/datosEntrada/metadatos/bytesDatosFiscales.txt",
 	"rutaFicheroSalida":"src/main/resources/practica2/datosSalida/datosFiscales.dat",
 	"tamanioTotalRegistros":"55",
-	"criterioOrden":"IRPF"
+	"criterioOrden":"IRPF",
+	"tipo":"fiscal",
+	"clavePuntero":""
 
 }
