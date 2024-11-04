@@ -11,13 +11,13 @@ import javax.xml.parsers.ParserConfigurationException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
-        try {
+    try {
 			new ManejoXML().run();
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    } 
 
     }
 }
