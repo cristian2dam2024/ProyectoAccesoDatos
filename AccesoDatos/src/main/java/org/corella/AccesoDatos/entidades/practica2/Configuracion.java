@@ -1,12 +1,17 @@
 package org.corella.AccesoDatos.entidades.practica2;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Configuracion implements Serializable{
 	
 	String rutaFicheroPosiciones, rutaFicheroDatos, rutaLongitudRegistros, rutaFicheroSalida, criterioOrden, tipo;
 	String clavePuntero = "";
+	
+	ArrayList<Long> registros = new ArrayList<Long>();
+	
 	int tamanioTotalRegistros;
+	int numeroRegistros = 0;
 	
 	public Configuracion() {
 		super();
@@ -68,6 +73,22 @@ public class Configuracion implements Serializable{
 	}
 	public void setClavePuntero(String clavePuntero) {
 		this.clavePuntero = clavePuntero;
+	}
+
+	public ArrayList<Long> getRegistros() {
+		return registros;
+	}
+	public void setRegistros(ArrayList<Long> registros) {
+		this.registros = registros;
+	}
+	public void addRegistro(Long posicionRegistro) {
+		this.registros.add(posicionRegistro);
+	}
+	public int getNumeroRegistros() {
+		return numeroRegistros;
+	}
+	public void setNumeroRegistros() {
+		this.numeroRegistros++;
 	}
 	
 	
