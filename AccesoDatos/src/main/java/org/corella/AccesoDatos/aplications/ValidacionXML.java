@@ -17,17 +17,21 @@ public class ValidacionXML {
 	
 	
 	public static DocumentBuilderFactory validarXML () {
+		
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		dbf.setIgnoringComments(true);
 		dbf.setIgnoringElementContentWhitespace(true);
+		
 		dbf.setValidating(true);
 		return dbf;
 	}
 	
 	public static DocumentBuilderFactory validarXML (File esquema) {
+		
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		dbf.setIgnoringComments(true);
 		dbf.setIgnoringElementContentWhitespace(true);
+		
 		dbf.setNamespaceAware(true);
 		try {
 			dbf.setSchema(SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).newSchema(esquema));

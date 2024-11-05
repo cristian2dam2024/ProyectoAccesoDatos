@@ -163,8 +163,8 @@ public class ManejoXML {
     	
         Document documentoXML = null;
         try {
-        	//DocumentBuilderFactory dbf = ValidacionXML.validarXML();
-        	DocumentBuilderFactory dbf = ValidacionXML.validarXML(new File("AccesoDatos/src/main/resources/clientes.xsd"));
+        	DocumentBuilderFactory dbf = ValidacionXML.validarXML();
+        	//DocumentBuilderFactory dbf = ValidacionXML.validarXML(new File("AccesoDatos/src/main/resources/clientes.xsd"));
             DocumentBuilder builder = dbf.newDocumentBuilder();
             builder.setErrorHandler(new GestorEventos());
             documentoXML = builder.parse(new File(rutaFichero));
