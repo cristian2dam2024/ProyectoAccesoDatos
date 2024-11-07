@@ -15,6 +15,9 @@ public class Constantes {
 
     public static String pruebaxml = res + "prueba.xml";
     
+    public static String ejercicio3_ficheroxml = res + "ejercicio3/Libros.xml";
+    public static String ejercicio3_ficherodtd = res + "ejercicio3/Libros.dtd";
+    public static String ejercicio3_ficheroxsd = res + "ejercicio3/Libros.xsd";
    
     public static String ejercicio3_ext_ficheroxml = res + "ejercicio3_extension/reed.xml";
     public static String ejercicio3_ext_ficherodtd = res + "ejercicio3_extension/reed.dtd";

@@ -4,7 +4,7 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
-import ejercicio3_extension.Ejercicio3_extension;
+import ejercicio3.Ejercicio3;
 
 public class Main {
 
@@ -12,7 +12,7 @@ public class Main {
 		
 		try {
 			
-			new Ejercicio3_extension().run();
+			new Ejercicio3().run();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

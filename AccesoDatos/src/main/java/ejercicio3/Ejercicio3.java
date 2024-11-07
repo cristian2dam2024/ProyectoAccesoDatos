@@ -1,4 +1,4 @@
-package ejercicio3_extension;
+package ejercicio3;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,25 +15,20 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class Ejercicio3_extension {
+public class Ejercicio3 {
 	
-	private ArrayList<Curso> arrayCursos = new ArrayList<>();
+	private ArrayList<Libro> arrayLibros = new ArrayList<>();
 	private Document xmlValidado;
 	
 	public void run() throws IOException, SAXException, ParserConfigurationException{
 	
-		File ficheroXML = new File(Constantes.ejercicio3_ext_ficheroxml);
-		File ficheroXSD = new File(Constantes.ejercicio3_ext_ficheroxsd);
+		File ficheroXML = new File(Constantes.ejercicio3_ficheroxml);
+		File ficheroXSD = new File(Constantes.ejercicio3_ficheroxsd);
 		
 		validaFichero(ficheroXML, null); // el fichero DTD no hace falta instanciarlo
 		validaFichero(ficheroXML, ficheroXSD);
 		
-		System.out.println(arrayCursos.get(0).toString());
-		
-		listaInstructores();
-		cuentaCursosImpartidos();
-		getShortestLongest();
-		
+		System.out.println(arrayLibros.get(0).toString());
 		
 	}
 	
@@ -54,27 +49,10 @@ public class Ejercicio3_extension {
 		}
 		
 		Document documentoXML = dbf.newDocumentBuilder().parse(ficheroXML);
-		NodeList cursos = documentoXML.getElementsByTagName("course");
+		NodeList libros = documentoXML.getElementsByTagName("course");
 		
-		for (int i = 0; i < cursos.getLength(); i++) {
-			arrayCursos.add(new Curso(cursos.item(i)));
+		for (int i = 0; i < libros.getLength(); i++) {
+			arrayLibros.add(new Libro(libros.item(i)));
 		}
 	}
-
-
-	public void listaInstructores() {
-		
-	}
-	
-	public void cuentaCursosImpartidos() {
-		
-	}
-	
-	public void getShortestLongest() {
-		
-	}
-	
-	
-	
-
 }
