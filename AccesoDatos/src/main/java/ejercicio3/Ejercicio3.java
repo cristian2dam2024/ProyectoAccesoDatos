@@ -18,17 +18,18 @@ import org.xml.sax.SAXException;
 public class Ejercicio3 {
 	
 	private ArrayList<Libro> arrayLibros = new ArrayList<>();
-	private Document xmlValidado;
 	
 	public void run() throws IOException, SAXException, ParserConfigurationException{
 	
 		File ficheroXML = new File(Constantes.ejercicio3_ficheroxml);
 		File ficheroXSD = new File(Constantes.ejercicio3_ficheroxsd);
 		
-		validaFichero(ficheroXML, null); // el fichero DTD no hace falta instanciarlo
+		//validaFichero(ficheroXML, null); // el fichero DTD no hace falta instanciarlo
 		validaFichero(ficheroXML, ficheroXSD);
 		
-		System.out.println(arrayLibros.get(0).toString());
+		for(Libro item : arrayLibros) {
+			System.out.println(item.toString());
+		}
 		
 	}
 	
@@ -49,7 +50,7 @@ public class Ejercicio3 {
 		}
 		
 		Document documentoXML = dbf.newDocumentBuilder().parse(ficheroXML);
-		NodeList libros = documentoXML.getElementsByTagName("course");
+		NodeList libros = documentoXML.getElementsByTagName("Book");
 		
 		for (int i = 0; i < libros.getLength(); i++) {
 			arrayLibros.add(new Libro(libros.item(i)));
