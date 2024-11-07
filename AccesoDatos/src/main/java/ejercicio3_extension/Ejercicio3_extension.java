@@ -2,6 +2,7 @@ package ejercicio3_extension;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,14 +17,18 @@ import org.xml.sax.SAXException;
 
 public class Ejercicio3_extension {
 	
-	public void run() throws IOException{
+	private ArrayList<Curso> arrayCursos = new ArrayList<>();
+	private Document xmlValidado;
+	
+	public void run() throws IOException, SAXException, ParserConfigurationException{
 	
 		File ficheroXML = new File(Constantes.ejercicio3_ext_ficheroxml);
-		//File ficheroDTD = new File(Constantes.ejercicio3_ext_ficherodtd);
 		File ficheroXSD = new File(Constantes.ejercicio3_ext_ficheroxsd);
 		
-		validaFichero(ficheroXML, null);
+		validaFichero(ficheroXML, null); // el fichero DTD no hace falta instanciarlo
 		validaFichero(ficheroXML, ficheroXSD);
+		
+		System.out.println(arrayCursos.get(0).toString());
 		
 		listaInstructores();
 		cuentaCursosImpartidos();
@@ -39,40 +44,23 @@ public class Ejercicio3_extension {
 		dbf.setIgnoringComments(true);
 		dbf.setIgnoringElementContentWhitespace(true);
 		
-		
 		if(esquemaXSD == null) {
 			dbf.setValidating(true);
+			System.out.println("Fichero validado correctamente con DTD.");
 		} else {
 			dbf.setNamespaceAware(true);
 			dbf.setSchema(SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).newSchema(esquemaXSD));
+			System.out.println("Fichero validado correctamente con XSD.");
 		}
 		
 		Document documentoXML = dbf.newDocumentBuilder().parse(ficheroXML);
+		NodeList cursos = documentoXML.getElementsByTagName("course");
 		
-		//lee primer nodo(raiz) y almacena los hijos en un NodeList, para cada nodo del nodeList repite la operación de lectura
-		almacenaNodo(documentoXML);
-		
-		
-	}
-
-	private void almacenaNodo(Node documentoXML) {
-		// TODO Auto-generated method stub
-		
-		
-		
-		NodeList hijos = documentoXML.getChildNodes();
-		for (int i = 0; i < hijos.getLength(); i++) {
-			almacenaNodo(hijos.item(i));
+		for (int i = 0; i < cursos.getLength(); i++) {
+			arrayCursos.add(new Curso(cursos.item(i)));
 		}
-		
 	}
 
-	private void validaDTD(File ficheroXML) {
-		// TODO Auto-generated method stub
-		
-		
-		
-	}
 
 	public void listaInstructores() {
 		
