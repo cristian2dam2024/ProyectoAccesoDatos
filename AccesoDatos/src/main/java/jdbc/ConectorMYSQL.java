@@ -7,13 +7,69 @@ public class ConectorMYSQL {
 		
 		try {
 			Connection conexion = creaConexion();
-			selectAlumnos(conexion);
+			//selectAlumnos(conexion);
+			selectAlumnosPrepared(conexion);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+
+	private String selectAlumnosPrepared(Connection conexion)throws SQLException {
+		String nombreAlumno = "";
+		
+		try {
+//			String query2 = "SELECT * FROM alumnos where nombre = ? AND apellido1 = ?";
+//			PreparedStatement pr2 = conexion.prepareStatement(query2);
+			
+			String query1 = "SELECT * FROM alumnos where id = ?";
+			PreparedStatement pr = conexion.prepareStatement(query1);
+			
+			String id = "2";
+			pr.setString(1, id); //el set debe corresponderse con el tipo de dato que tenemos en la base de datos
+			ResultSet salidaQuery = pr.executeQuery();
+			int numeroColumnas = salidaQuery.getMetaData().getColumnCount();
+			while(salidaQuery.next()) {
+				
+				for (int i = 1; i <= numeroColumnas; i++) {
+					System.out.print(salidaQuery.getObject(i) +" ");
+				}
+				System.out.println();
+			}
+			pr.close();
+			
+			String query3 = "INSERT INTO alumnos VALUES (?,?,?,?)";
+			PreparedStatement pr3 = conexion.prepareStatement(query3);
+			pr3.setString(1, "5");
+			pr3.setString(2, "Manuel");
+			pr3.setString(3, "Gomez");
+			pr3.setString(4, "Gomez");
+			pr3.executeUpdate();
+			conexion.commit();
+			pr3.close();
+			
+			
+			salidaQuery.close();
+			conexion.close();
+			
+			//executeUpdate//modificaciones dentro la tabla, insert update...
+			//para consultas dinamicas, evita problemas de inyeccion de codigo sql dentro del codigo java
+			//mejora el rendimiento de las consultas a la base de datos
+			//
+			
+			return nombreAlumno;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	} 
+	
 
 	private void selectAlumnos(Connection conexion) throws SQLException {
 		Statement sentencia = conexion.createStatement();
