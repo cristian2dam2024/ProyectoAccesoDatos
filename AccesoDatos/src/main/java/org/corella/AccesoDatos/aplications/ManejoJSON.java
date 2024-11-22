@@ -15,8 +15,28 @@ public class ManejoJSON{
         //escribirJSON();
         serializedOrgJSON();
         //writeJacksonJSON();
-        leerJacksonJSON();
+        //leerJacksonJSON();
+    }
+    
+    private void escribirJSON() {
 
+        JSONObject objetoJSON = new JSONObject();
+        objetoJSON.put("Nombre", "Carlos");
+        objetoJSON.put("Edad", 23);
+
+        JSONArray asignaturasMatriculadas = new JSONArray();
+        asignaturasMatriculadas.put(0, "Acceso a datos");
+        asignaturasMatriculadas.put(1, "Empresa");
+        objetoJSON.put("Asignaturas matriculadas", asignaturasMatriculadas);
+//
+        JSONArray notas = new JSONArray();
+        JSONObject notaAsignatura = new JSONObject();
+        notaAsignatura.put("Base de datos", 10);
+        notaAsignatura.put("Programacion", 10);
+        notas.put(notaAsignatura);
+        objetoJSON.put("Asignatura_notas" , notas);
+
+        System.out.println(objetoJSON.toString());
 
     }
 
@@ -42,6 +62,19 @@ public class ManejoJSON{
 
         System.out.println(demoJSON);
     }
+    
+    private void writeJacksonJSON() throws IOException {
+        ObjectMapper mapeoObjeto = new ObjectMapper();
+        ArrayList<String> asignaturasSuperadas = new ArrayList<>();
+        asignaturasSuperadas.add("Acceso a datos");
+        asignaturasSuperadas.add("Entornos");
+        asignaturasSuperadas.add("Programacion");
+
+        Alumno alumno = new Alumno("",20,false, asignaturasSuperadas);
+        
+        File ficheroSalida = new File("AccesoDatos/src/main/resources/FicheroOutAlumnos.json");
+        mapeoObjeto.writeValue(ficheroSalida, alumno);
+    }
 
 
     private void leerJacksonJSON() throws IOException {
@@ -49,19 +82,6 @@ public class ManejoJSON{
         File fichero = new File("AccesoDatos/src/main/resources/FicheroOutAlumnos.json");
         Alumno alumno = mapeoObjeto.readValue(fichero, Alumno.class);
         System.out.println(alumno.getNombre());
-
-    }
-
-    private void writeJacksonJSON() throws IOException {
-        ObjectMapper mapeoObjeto = new ObjectMapper();
-        ArrayList asignaturasSuperadas = new ArrayList();
-        asignaturasSuperadas.add("Acceso a datos");
-        asignaturasSuperadas.add("Entornos");
-        asignaturasSuperadas.add("Programacion");
-
-        Alumno alumno = new Alumno("",20,false, asignaturasSuperadas);
-        mapeoObjeto.writeValue(new File("AccesoDatos/src/main/resources/FicheroOutAlumnos.json"), alumno);
-
     }
 
     static class Alumno implements Serializable {
@@ -112,31 +132,5 @@ public class ManejoJSON{
             this.asignaturasSuperadas = asignaturasSuperadas;
         }
     }
-
-
-
-    private void escribirJSON() throws IOException {
-
-        JSONObject objetoJSON = new JSONObject();
-        objetoJSON.put("Nombre", "Carlos");
-        objetoJSON.put("Edad", 23);
-
-        JSONArray asignaturasMatriculadas = new JSONArray();
-        asignaturasMatriculadas.put(0, "Acceso a datos");
-        asignaturasMatriculadas.put(1, "Empresa");
-        objetoJSON.put("Asignaturas matriculadas", asignaturasMatriculadas);
-
-        JSONArray notas = new JSONArray();
-        JSONObject notaAsignatura = new JSONObject();
-        notaAsignatura.put("Base de datos", 10);
-        notaAsignatura.put("Programacion", 10);
-        notas.put(0, notas);
-        objetoJSON.put("Asignatura_notas" , notas);
-
-        System.out.println(objetoJSON.toString());
-
-    }
-
-
 }
 
