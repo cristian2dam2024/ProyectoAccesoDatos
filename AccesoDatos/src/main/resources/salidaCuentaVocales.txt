@@ -1,0 +1,5 @@
+Numero de aes: 3
+Numero de ues: 1
+Numero de ees: 2
+Numero de ies: 2
+Numero de oes: 2

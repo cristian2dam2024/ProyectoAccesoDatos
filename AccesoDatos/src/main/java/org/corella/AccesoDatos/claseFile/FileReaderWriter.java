@@ -1,6 +1,7 @@
 package org.corella.AccesoDatos.claseFile;
 
 import java.io.*;
+import java.util.HashMap;
 
 /*
     1. Crear constructor de clase para path dinamico, para esta clase inicializa la variable private String pathEscritura
@@ -11,27 +12,14 @@ import java.io.*;
 
 public class FileReaderWriter {
 
-    private String pathEscritura;
-
-    public FileReaderWriter(String pathEscritura) {
-        this.pathEscritura = pathEscritura;
-        this.run("src/test/resources/PruebaReader.txt");
+    private String pathEscritura = "src/main/resources/salidaCuentaVocales.txt";
+    
+    public void run(String ficheroEntrada){
+        cuentaVocales(ficheroEntrada);
     }
 
-    private void escribirContadores(String rutaEscritura, String contenido) throws IOException {
-
-        FileWriter escritor = new FileWriter(rutaEscritura, true);
-
-        for (int i = 0; i < contenido.length(); i++) {
-            escritor.write(contenido.charAt(i));
-        }
-        escritor.write("\n");
-        escritor.close();
-    }
-
-    public void run(String ruta){
-
-        try{
+	private void cuentaVocales(String ruta) {
+		try{
             File fichero = new File(ruta);
 
             if (!fichero.exists()) {
@@ -41,64 +29,24 @@ public class FileReaderWriter {
                 throw new FileNotFoundException("La ruta indica un directorio");
             } else {
                 FileReader lector = new FileReader(fichero);
-                int [] contadorVocales = new int[5];
+                
+                HashMap<Character, Integer> contador = new HashMap<>();
                 int indice;
-
                 while( (indice = lector.read()) != -1){
                     char letraLeida = (char)indice;
-
-                    switch(letraLeida){
-
-                        case 'a':
-                            contadorVocales[0]++;
-                            break;
-                        case 'e':
-                            contadorVocales[1]++;
-                            break;
-                        case 'i':
-                            contadorVocales[2]++;
-                            break;
-                        case 'o':
-                            contadorVocales[3]++;
-                            break;
-                        case 'u':
-                            contadorVocales[4]++;
-                            break;
-
-                        case 'A':
-                            contadorVocales[0]++;
-                            break;
-                        case 'E':
-                            contadorVocales[1]++;
-                            break;
-                        case 'I':
-                            contadorVocales[2]++;
-                            break;
-                        case 'O':
-                            contadorVocales[3]++;
-                            break;
-                        case 'U':
-                            contadorVocales[4]++;
-                            break;
-
-                            default:
-                                break;
-                    }
+                    contador.merge(letraLeida, 1, Integer::sum);
                 }
-
-                System.out.println("Numero de Aes: " + contadorVocales[0]);
-                System.out.println("Numero de Es: " + contadorVocales[1]);
-                System.out.println("Numero de Ies: " + contadorVocales[2]);
-                System.out.println("Numero de Oes: " + contadorVocales[3]);
-                System.out.println("Numero de Ues: " + contadorVocales[4]);
-
-                File f = new File(pathEscritura);
-                escribirContadores(pathEscritura, "Numero de Aes: " + contadorVocales[0]);
-                escribirContadores(pathEscritura, "Numero de Es: " + contadorVocales[1]);
-                escribirContadores(pathEscritura, "Numero de Ies: " + contadorVocales[2]);
-                escribirContadores(pathEscritura, "Numero de Oes: " + contadorVocales[3]);
-                escribirContadores(pathEscritura, "Numero de Ues: " + contadorVocales[4]);
-
+                
+                contador.forEach((letra, numero) ->{
+                	try {
+                		String salida = ("Numero de "+letra+"es: " + numero);
+                    	System.out.println(salida);
+						escribirContadores(pathEscritura, salida);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+                });
 
                 lector.close();
             }
@@ -111,6 +59,18 @@ public class FileReaderWriter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+	}
+	
+	private void escribirContadores(String rutaEscritura, String contenido) throws IOException {
+
+        FileWriter escritor = new FileWriter(rutaEscritura, true);
+
+        for (int i = 0; i < contenido.length(); i++) {
+            escritor.write(contenido.charAt(i));
+        }
+        escritor.write("\n");
+        escritor.close();
     }
+    
 }
 
