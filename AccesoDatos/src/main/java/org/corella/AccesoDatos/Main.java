@@ -11,40 +11,12 @@ import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        //PruebaDirectorio();
-        //PruebaReaderWriter();
-        PruebaCSV();
-        //PruebaIOStream();
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-    }
+//    	new LeerEscribirObjetos().run(Constantes.rutaSalidaFicheroBytes);
+    	new LeerEscribirObjetos().runType(Constantes.rutaSalidaFicheroTipos);
+//    	new LeerEscribirObjetos().runObject(Constantes.rutaSalidaFicheroObjetos);
 
-    private static void PruebaIOStream() throws IOException {
-        LeerEscribirObjetos IOStreamTester = new LeerEscribirObjetos();
-        IOStreamTester.run();
-    }
-
-    private static void PruebaCSV() throws IOException {
-        try {
-            ManejoCSV tester = new ManejoCSV();
-            tester.run("src/main/resources/alumnos.csv");
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static void PruebaReaderWriter() {
-        FileReaderWriter frw = new FileReaderWriter(Constantes.rutaFicheroSalidaContarVocales);
-        frw.run(Constantes.rutaFicheroVocales);
-    }
-
-
-    private static void PruebaDirectorio() {
-        FuncionesDirectorio fd = new FuncionesDirectorio();
-        //fd.run("README.txt");
-        //fd.run("pom.xml");
-        //fd.run("target\\classes");
-        fd.run("src");
     }
 }
 

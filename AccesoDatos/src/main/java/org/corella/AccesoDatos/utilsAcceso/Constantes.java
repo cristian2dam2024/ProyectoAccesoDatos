@@ -8,9 +8,10 @@ public class Constantes {
     public static String rutaFicheroSalidaContarVocales = res + "PruebaWriter.txt";
 
     public static String rutaSalidaFicheroCSV = res + "alumnosOut.CSV";
+    
     public static String rutaSalidaFicheroBytes = res + "ficheroOutBytes.txt";
-
-    public static String rutaSalidaFicheroTipos = res + "rutaSalidaFicheroTipos";
+    public static String rutaSalidaFicheroTipos = res + "rutaSalidaFicheroTipos.dat";
+	public static String rutaSalidaFicheroObjetos = res + "rutaSalidaFicheroObjetos.dat";
 
 }
 
