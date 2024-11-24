@@ -37,17 +37,23 @@ public class FileReaderWriter {
                     contador.merge(letraLeida, 1, Integer::sum);
                 }
                 
+                FileWriter escritor = new FileWriter(this.pathEscritura, true);
                 contador.forEach((letra, numero) ->{
                 	try {
                 		String salida = ("Numero de "+letra+"es: " + numero);
                     	System.out.println(salida);
-						escribirContadores(pathEscritura, salida);
+                    	
+                    	for (int i = 0; i < salida.length(); i++) {
+                            escritor.write(salida.charAt(i));
+                        }
+                        escritor.write("\n"); 
+                        
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
                 });
-
+                escritor.close();
                 lector.close();
             }
 
@@ -60,17 +66,6 @@ public class FileReaderWriter {
             e.printStackTrace();
         }
 	}
-	
-	private void escribirContadores(String rutaEscritura, String contenido) throws IOException {
-
-        FileWriter escritor = new FileWriter(rutaEscritura, true);
-
-        for (int i = 0; i < contenido.length(); i++) {
-            escritor.write(contenido.charAt(i));
-        }
-        escritor.write("\n");
-        escritor.close();
-    }
     
 }
 
