@@ -7,6 +7,12 @@
   <name>Archetype - AccesoDatos</name>
   <url>http://maven.apache.org</url>
     <dependencies>
+
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-base</artifactId>
+			<version>24-ea+15</version>
+		</dependency>
     </dependencies>
     <build>
         <plugins>
