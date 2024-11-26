@@ -3,7 +3,7 @@ package org.corella.AccesoDatos.utilsAcceso;
 public class Constantes {
 
 
-    private static String res = "AccesoDatos/src/main/resources/";
+    private static String res = "src/main/resources/";
 
     public static String rutaFicheroVocales = res + "PruebaReader.txt";
     public static String rutaFicheroSalidaContarVocales = res + "PruebaWriter.txt";
@@ -15,6 +15,7 @@ public class Constantes {
     public static String rutaSalidaFicheroTipos = res + "rutaSalidaFicheroTipos";
 
     public static String pruebaxml = res + "prueba.xml";
+    public static String salidaxml = res + "salidaXML.xml";
 
 }
 

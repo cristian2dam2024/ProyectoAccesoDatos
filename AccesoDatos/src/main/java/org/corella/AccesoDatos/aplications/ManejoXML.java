@@ -1,6 +1,8 @@
 package org.corella.AccesoDatos.aplications;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.io.StringWriter;
 
@@ -32,6 +34,7 @@ import org.xmldb.api.base.Database;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
+import org.corella.AccesoDatos.utilsAcceso.Constantes;
 import org.exist.xmldb.EXistResource;
 
 
@@ -39,18 +42,18 @@ public class ManejoXML {
 
     private static final String INDENT_LEVEL = " ";
 
-    public void run() throws ParserConfigurationException{
+    public void run() throws ParserConfigurationException, IOException{
     	
     	//Document documentoXML = leerXML("src/main/resources/prueba.xml");
-    	//escribirXML();
+    	escribirXML();
     	try {
-			Collection col = obtenerColeccion();
+//			Collection col = obtenerColeccion();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
-    private void escribirXML() throws ParserConfigurationException{
+    private void escribirXML() throws ParserConfigurationException, IOException{
     	try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -79,18 +82,18 @@ public class ManejoXML {
 			transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "clientes.dtd");
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 			
-			//sacar salida por consola
-			StringWriter sw = new StringWriter();
-			StreamResult sr = new StreamResult(sw);
-			transformer.transform(domSource, sr);
-			System.out.println(sw.toString());
+//			//sacar salida por consola
+//			StringWriter sw = new StringWriter();
+//			StreamResult sr = new StreamResult(sw);
+//			transformer.transform(domSource, sr);
+//			System.out.println(sw.toString());
 		
-			/*
+			
 			//sacar salida a un fichero
-			FileWriter fw = new FileWriter("");
+			FileWriter fw = new FileWriter(Constantes.salidaxml);
 			StreamResult sr2 = new StreamResult(fw);
 			transformer.transform(domSource, sr2);
-			fw.close();*/	
+			fw.close();
 		} catch (ParserConfigurationException parserException) {
 			System.err.println(parserException.getMessage());
 			
