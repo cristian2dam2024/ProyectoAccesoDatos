@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.StringWriter;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -17,6 +18,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.validation.SchemaFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -43,16 +45,10 @@ public class ManejoXML {
     private static final String INDENT_LEVEL = " ";
 
     public void run() throws ParserConfigurationException, IOException{
-    	
-    	//Document documentoXML = leerXML("src/main/resources/prueba.xml");
     	escribirXML();
-    	try {
-//			Collection col = obtenerColeccion();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	leerXML(Constantes.salidaxml);
     }
+    
     private void escribirXML() throws ParserConfigurationException, IOException{
     	try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -88,12 +84,12 @@ public class ManejoXML {
 //			transformer.transform(domSource, sr);
 //			System.out.println(sw.toString());
 		
-			
 			//sacar salida a un fichero
 			FileWriter fw = new FileWriter(Constantes.salidaxml);
 			StreamResult sr2 = new StreamResult(fw);
 			transformer.transform(domSource, sr2);
 			fw.close();
+			
 		} catch (ParserConfigurationException parserException) {
 			System.err.println(parserException.getMessage());
 			
@@ -109,25 +105,34 @@ public class ManejoXML {
 		} 
     }
     
-	private Document leerXML(String rutaFichero) {
+	private void leerXML(String rutaFichero) {
 
 		Document documentoXML = null;
 		try {
-			// DocumentBuilderFactory dbf = ValidacionXML.validarXML();
-			DocumentBuilderFactory dbf = ValidacionXML
-					.validarXML(new File("AccesoDatos/src/main/resources/clientes.xsd"));
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			dbf.setIgnoringComments(true);
+			dbf.setIgnoringElementContentWhitespace(true);
+			
+			boolean validaDTD = false;
+			if(validaDTD) {
+				dbf.setValidating(true);
+			} else {
+				dbf.setNamespaceAware(true);
+				dbf.setSchema(SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).newSchema(new File(Constantes.ficheroXSD)));
+			}
+			
 			DocumentBuilder builder = dbf.newDocumentBuilder();
 			builder.setErrorHandler(new GestorEventos());
 			documentoXML = builder.parse(new File(rutaFichero));
 			muestraNodo(documentoXML, System.out, 1);
+			
 		} catch (FileNotFoundException | ParserConfigurationException e) {
 			System.err.println(e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
 	}
-
+	
     private static void muestraNodo(Node nodo, PrintStream printStream, int nivel) {
     	
         if(nodo.getNodeType() == Node.TEXT_NODE && nodo.getNodeValue().isEmpty()){
@@ -187,70 +192,4 @@ public class ManejoXML {
     		System.err.println("Aviso: " + e.getMessage());
     	}
     }
-    
-    private static Collection obtenerColeccion() throws Exception {
-    	Database databaseDriver;
-    	Collection coleccion;
-    	
-    	databaseDriver = (Database) Class.forName("org.exist.xmldb.DatabaseImpl").newInstance();
-    	coleccion = DatabaseManager.getCollection("xmldb:exist://localhost:8080//db/apps/demo/data/addresses/","admin", "admin");
-//    	return coleccion;
-    	
-    	
-    	 final String URI = "xmldb:exist://localhost:8080/exist/xmlrpc/db/exist/apps/demo/data/addresses/";
-    	 final String driver = "org.exist.xmldb.DatabaseImpl";
-    	 //driver gestiona la conexion con la base de datos
-    	 //cada lenguage tiene su driver, mysql tiene otro
-         
-         // initialize database driver
-         Class cl = Class.forName(driver);
-         Database database = (Database) cl.newInstance();
-         database.setProperty("create-database", "true");
-         //en caso de que no exista la crea
-         DatabaseManager.registerDatabase(database);
-         
-         //variables de gestion de recursos de la base de datos, recursos o ficheros
-         Collection col = null;
-         //coleccion va a tener mas colecciones dentro
-         XMLResource res = null;
-         //va a ser un documento o recurso de esa coleccion, de aqui vamos a sacar los datos
-         
-         try {    
-             // get the collection
-             col = DatabaseManager.getCollection(URI ,"admin","admin");
-             col.setProperty(OutputKeys.INDENT, "no");
-             res = (XMLResource)col.getResource("0ff8612a-b998-4677-84a3-73e9ef84ba5f.xml");
-             
-             //EJERCICIOS INCOMPLETOS eXist-DB
-//             Crear y borrar una coleccion.
-//             String URIserver;
-//             String rutaColeccion;
-//             Collection start = DatabaseManager.getCollection(URIserver + rutaColeccion);
-//             
-//             if(start == null) {
-//            	 Collection parent = DatabaseManager.getCollection(URIserver);
-//                 CollectionManagementService mgt = (CollectionManagementService) parent.getService("CollectionManagementService", "1.0");
-//                 
-//             }
-//             Crear (con contenido) un recurso y borrar un recurso
-//             (XMLResource).setContent
-//             col.createResource(driver, null)
-             if(res == null) {
-                 System.out.println("document not found!");
-             } else {
-                 System.out.println(res.getContent());
-                 return coleccion;
-             }
-         } finally {
-             //dont forget to clean up!
-             if(res != null) {
-                 try { ((EXistResource)res).freeResources(); } catch(XMLDBException xe) {xe.printStackTrace();}
-             }
-             if(col != null) {
-                 try { col.close(); } catch(XMLDBException xe) {xe.printStackTrace();}
-             }
-         }
-		return col;
-    }
-
 }

@@ -16,6 +16,7 @@ public class Constantes {
 
     public static String pruebaxml = res + "prueba.xml";
     public static String salidaxml = res + "salidaXML.xml";
+    public static String ficheroXSD = res + "clientes.xsd";
 
 }
 
