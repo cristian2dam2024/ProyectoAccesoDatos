@@ -4,12 +4,9 @@ import java.util.Scanner;
 
 public class ConectorMYSQL {
 	
-
 	public void run() throws SQLException {
-		
 //			consultasEmpleados();
 			consultasEscuela();
-			
 	}
 
 	private void consultasEmpleados() throws SQLException {
@@ -29,12 +26,11 @@ public class ConectorMYSQL {
 		conexion.close();
 	}
 	
-	private static String hostname = "localhost";
-	private static int port = 3306;
-//	private static String databaseName = "employees";
-	
 	private static final String driverClassName = "com.mysql.cj.jdbc.Driver";
-	private static String url; 
+	
+	private static String url;
+	private static String hostname = "localhost";
+	private static int port = 3306;	
 	private static final String username = "root";
 	private static final String password = "1234";
 	
@@ -67,10 +63,7 @@ public class ConectorMYSQL {
 		conexion.close();
 	}
 
-	//CRUD: crear, leer, update, borrar sobre la tabla departaments
-	
 	private void selectAlumnosPrepared(Connection conexion)throws SQLException {
-		
 			try {				
 				String query = "SELECT * FROM alumno where id = ?";
 	//			String query = "SELECT * FROM alumnos where nombre = ? AND apellido1 = ?";
@@ -89,7 +82,7 @@ public class ConectorMYSQL {
 			}
 		}
 
-	private PreparedStatement insertAlumnosPrepared(Connection conexion) throws SQLException {
+	private void insertAlumnosPrepared(Connection conexion) throws SQLException {
 		String query = "INSERT INTO alumno (nombre, notaT1, notaFinal) VALUES (?,?,?)";
 		PreparedStatement statement = conexion.prepareStatement(query);
 		
@@ -114,10 +107,23 @@ public class ConectorMYSQL {
 		//para consultas dinamicas, evita problemas de inyeccion de codigo sql dentro del codigo java
 		//mejora el rendimiento de las consultas a la base de datos
 		
-		return statement;
 	}
 
+	//CRUD: crear, leer, modificar, borrar sobre la tabla departaments
 	public void operacionesCRUD(Connection conexion) throws SQLException {
+		
+		/*
+		 * leer = SELECT -> EXECUTEquery-RESULTSET
+		 * crear = INSERT -> EXECUTEupdate-COMMIT
+		 * modificar = UPDATE -> EXECUTEupdate-COMMIT
+		 * borrar = DELETE -> EXECUTEupdate-COMMIT
+		 * 
+		 * */
+		
+		//conexion.createStatement().
+		//conexion.prepareStatement("").
+		//conexion.prepareCall("").
+		
 		
 		Statement sentencia = conexion.createStatement();
 		Scanner scanner = new Scanner(System.in);
@@ -236,15 +242,10 @@ public class ConectorMYSQL {
 		cs.execute();
 		
 		double salidaProcedimiento = cs.getDouble(3);
-		
 		System.out.println("Media de salarios para el departamento " + dpto + " en el año: " + anyo +": " + salidaProcedimiento);
 		
 		cs.close();
 		conexion.close();
-		
-		
-//		ejecucion por lotes, normalmente se usa para insertar datos en la base de datos
-//		addBatch deja las tareas preparadas en diferido
 	}
 	
 	private void llamadaFuncion (Connection conexion) throws SQLException{
@@ -259,17 +260,16 @@ public class ConectorMYSQL {
 		cs.execute();
 		
 		double salidaProcedimiento = cs.getDouble(1);
-		
 		System.out.println("Media de salarios para el departamento " + dpto + " en el año: " + anyo +": " + salidaProcedimiento);
+		
 		cs.close();
 		conexion.close();
-		
-//		ejecucion por lotes, normalmente se usa para insertar datos en la base de datos
-//		addBatch deja las tareas preparadas en diferido
 	}
 	
+//	ejecucion por lotes, normalmente se usa para insertar datos en la base de datos
+//	addBatch deja las tareas preparadas en diferido
+	
 	private void ejecutarBatch(Connection conexion) {
-		String nombreAlumno = null;
 		String [][] datos = {{"Anton","10","10"},{"Arancha","100","10"},{"Abel","10","100"}};
 		try {
 			PreparedStatement sentencia = conexion.prepareStatement("INSERT INTO alumno (nombre, notaT1, notaFinal) VALUES (?,?,?)");
@@ -292,12 +292,9 @@ public class ConectorMYSQL {
 					case 2:
 						sentencia.setInt(3, Integer.valueOf(datos[punteroFila][punteroRegistro]));
 						break;
-
 					default:
 						break;
 					}
-					
-					
 				}
 				sentencia.addBatch();
 			}
