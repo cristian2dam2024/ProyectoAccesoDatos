@@ -1,5 +1,6 @@
 package ejercicioNavidad;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.corella.AccesoDatos.utilsAcceso.Dates;
@@ -21,9 +22,9 @@ import utils.HibernateUtilNavidad;
 public class ORM_Conexion_navidad {
 	
 	public void run() {
-//		insertaEmpleadoNormal();
+		insertaEmpleadoNormal();
 //		insertaEmpleadoManager();
-		updateEmpleado(14);
+//		updateEmpleado(14);
 //		deleteEmpleado(18);
 	}
 	
@@ -51,31 +52,36 @@ public class ORM_Conexion_navidad {
 			nuevaEntradaDepartamento.setDepartamento(departamento);
 			nuevaEntradaDepartamento.setEmpleado(empleado);
 			sesion.persist(nuevaEntradaDepartamento);
-//			
+			
 //			//Asignar un titulo a ese empleado
-//			
+			
 			Titles titulo = new Titles();
 			titulo.setEmployees(empleado);
-//			sesion.persist(titulo);
-//			
+			
 			TitlesId claveTitulo = new TitlesId();
 			claveTitulo.setFromDate(new Dates().getFechaSQL("1996-06-11"));
 			claveTitulo.setTitle("Junior Developer");
 			titulo.setId(claveTitulo);
-//			sesion.refresh(titulo);
-			sesion.persist(titulo);
-//			
+//			sesion.persist(titulo);
+			
 			//Crear un registro de salario para ese empleado
 			Salaries salario = new Salaries();
 			salario.setEmpleado(empleado);
 			salario.setSalary(2000);
-//			sesion.persist(salario);
 			
 			SalariesId claveSalario = new SalariesId();
 			claveSalario.setFromDate(new Dates().getFechaSQL("2025-04-02"));
 			salario.setId(claveSalario);
-//			sesion.refresh(salario);
-			sesion.persist(salario);
+//			sesion.persist(salario);
+			
+			empleado.setTitulo(titulo);
+			if(empleado.getSalarios() == null) {
+				empleado.setSalarios(new HashSet<Salaries>());
+			}
+			
+			empleado.getSalarios().add(salario);
+			
+			sesion.persist(empleado);
 			
 			//Modificar ese empleado
 			//Eliminar ese empleado
