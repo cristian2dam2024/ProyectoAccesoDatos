@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 16 dic 2024, 20:55:42 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 8 ene 2025, 1:26:37 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class catalog="employees" name="employees.Titles" optimistic-lock="none" table="titles">
-        <composite-id class="employees.TitlesId" name="id">
+    <class catalog="employees" name="ejercicioNavidad_clases.Titles" optimistic-lock="none" table="titles">
+        <composite-id class="ejercicioNavidad_clases.TitlesId" name="id">
             <key-property name="empNo" type="int">
                 <column name="emp_no"/>
             </key-property>
@@ -13,7 +13,7 @@
                 <column length="50" name="title"/>
             </key-property>
         </composite-id>
-        <many-to-one class="employees.Employees" fetch="select" insert="false" name="employees" update="false">
+        <many-to-one class="ejercicioNavidad_clases.Employees" fetch="select" insert="false" name="employees" update="false">
             <column name="emp_no" not-null="true"/>
         </many-to-one>
         <property name="toDate" type="date">

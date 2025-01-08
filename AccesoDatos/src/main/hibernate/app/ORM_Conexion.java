@@ -21,10 +21,10 @@ public class ORM_Conexion {
 	public void run() {
 		
 //		creaSede();
-//		modificaSede();
-//		eliminaSede();
+		modificaSede();
+		eliminaSede();
 		
-//		consultaSedes();
+		consultaSedes();
 //		consultaSedeDinamica();
 		
 //		consultaSueldoEmpleado();
@@ -41,7 +41,7 @@ public class ORM_Conexion {
 		
 		//CLASE 16-12-24
 //		ejemploQuerySelect();
-		ejemploQueryUpdate();
+//		ejemploQueryUpdate();
 		
 	}
 	

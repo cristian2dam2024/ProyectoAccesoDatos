@@ -36,7 +36,7 @@
     
     <!-- opciones de hbm2dll:
     create : Borra y crea SIEMPRE la base de datos
-    update : Mantiene los datos, actulizando la estructura de la BBDD. Util en     producción.
+    update : Mantiene los datos, actulizando la estructura de la BBDD. Util en producción.
     create-drop : Crea todo, y al finalizar el programa lo borra
     validate: comprueba que las especificaciones del mapeo son validas con el diseño relacional de la BBDD
     -->

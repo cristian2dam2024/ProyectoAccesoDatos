@@ -7,7 +7,7 @@
  Driver JDBC -->
   <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
   <!-- Conexión. Añadir ?createDatabaseIfNotExist=true para crear la BBDD  -->
-  <property name="connection.url">jdbc:mysql://localhost:3306/proyecto_orm</property>
+  <property name="connection.url">jdbc:mysql://localhost:3306/employees</property>
   <!-- Usuario y password de la BBDD -->
   <property name="connection.username">root</property>
   <property name="connection.password">1234</property>
@@ -21,21 +21,22 @@
   <!-- Informa de las operaciones "reales" SQL. Interesante en desarrollo -->
   <property name="show_sql">true</property>
   <!-- Mantenimiento de la BBDD -->
-  <property name="hbm2ddl.auto">update</property>
+  <property name="hbm2ddl.auto">validate</property>
   <!-- opciones de hbm2dll:
     create : Borra y crea SIEMPRE la base de datos
     update : Mantiene los datos, actulizando la estructura de la BBDD. Util en     producción.
     create-drop : Crea todo, y al finalizar el programa lo borra
     validate: comprueba que las especificaciones del mapeo son validas con el diseño relacional de la BBDD
     -->
-  <property name="hibernate.reveng.strategy">org.hibernate.tool.hbm2x.ReverseEngineeringStrategy</property>
-  
-  
-  <mapping resource="employees/Departments.hbm.xml"/>
-  <mapping resource="employees/Employees.hbm.xml"/>
-  <mapping resource="employees/Employees.hbm.xml"/>
-  <mapping resource="employees/Titles.hbm.xml"/>
-  
-  
+  <mapping class="ejercicioNavidad_clases.Departments"/>
+  <mapping class="ejercicioNavidad_clases.DeptEmp"/>
+  <mapping class="ejercicioNavidad_clases.DeptManager"/>
+  <mapping class="ejercicioNavidad_clases.Employees"/>
+  <mapping class="ejercicioNavidad_clases.Salaries"/>
+  <mapping class="ejercicioNavidad_clases.Titles"/>
+  <mapping class="ejercicioNavidad_clases.DeptEmpId"/>
+  <mapping class="ejercicioNavidad_clases.DeptManagerId"/>
+  <mapping class="ejercicioNavidad_clases.SalariesId"/>
+  <mapping class="ejercicioNavidad_clases.TitlesId"/>
  </session-factory>
 </hibernate-configuration>

@@ -17,6 +17,7 @@ public class Constantes {
     public static String pruebaxml = res + "prueba.xml";
     
     public static String hibernateConfigFile = res + "hibernate/Hibernate.cfg.xml";
+    public static String hibernateConfigFileNavidad = res + "hibernate_employees/Hibernate.cfg.xml";
 
 }
 

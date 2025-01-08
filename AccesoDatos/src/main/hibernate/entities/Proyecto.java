@@ -17,8 +17,6 @@ public class Proyecto {
 		super();
 	}
 
-
-
 	public Proyecto(String nomProy) {
 		super();
 		this.nomProy = nomProy;

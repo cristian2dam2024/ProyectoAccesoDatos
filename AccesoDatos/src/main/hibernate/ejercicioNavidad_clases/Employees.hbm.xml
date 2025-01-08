@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 16 dic 2024, 20:55:42 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 8 ene 2025, 1:26:37 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class catalog="employees" name="employees.Employees" optimistic-lock="none" table="employees">
+    <class catalog="employees" name="ejercicioNavidad_clases.Employees" optimistic-lock="none" table="employees">
         <id name="empNo" type="int">
             <column name="emp_no"/>
             <generator class="assigned"/>
@@ -21,29 +21,30 @@
         <property name="hireDate" type="date">
             <column length="10" name="hire_date" not-null="true"/>
         </property>
+        
         <set fetch="select" inverse="true" lazy="true" name="titleses" table="titles">
             <key>
                 <column name="emp_no" not-null="true"/>
             </key>
-            <one-to-many class="employees.Titles"/>
+            <one-to-many class="ejercicioNavidad_clases.Titles"/>
         </set>
         <set fetch="select" inverse="true" lazy="true" name="salarieses" table="salaries">
             <key>
                 <column name="emp_no" not-null="true"/>
             </key>
-            <one-to-many class="employees.Salaries"/>
+            <one-to-many class="ejercicioNavidad_clases.Salaries"/>
         </set>
         <set fetch="select" inverse="true" lazy="true" name="deptEmps" table="dept_emp">
             <key>
                 <column name="emp_no" not-null="true"/>
             </key>
-            <one-to-many class="employees.DeptEmp"/>
+            <one-to-many class="ejercicioNavidad_clases.DeptEmp"/>
         </set>
         <set fetch="select" inverse="true" lazy="true" name="deptManagers" table="dept_manager">
             <key>
                 <column name="emp_no" not-null="true"/>
             </key>
-            <one-to-many class="employees.DeptManager"/>
+            <one-to-many class="ejercicioNavidad_clases.DeptManager"/>
         </set>
     </class>
 </hibernate-mapping>
