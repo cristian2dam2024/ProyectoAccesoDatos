@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 12 dic 2024, 19:29:33 by Hibernate Tools 6.3.2.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="proyecto_orm" name="entities.DepartamentoProyectos" optimistic-lock="none" table="departamento_proyectos">
+        <composite-id class="entities.DepartamentoProyectosId" name="id">
+            <key-property name="idDepto" type="int">
+                <column name="id_depto"/>
+            </key-property>
+            <key-property name="idProy" type="int">
+                <column name="id_proy"/>
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

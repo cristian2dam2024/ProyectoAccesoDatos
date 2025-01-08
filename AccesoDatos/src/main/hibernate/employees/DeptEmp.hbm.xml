@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 16 dic 2024, 20:55:42 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="employees" name="employees.DeptEmp" optimistic-lock="none" table="dept_emp">
+        <composite-id class="employees.DeptEmpId" name="id">
+            <key-property name="deptNo" type="string">
+                <column length="4" name="dept_no"/>
+            </key-property>
+            <key-property name="empNo" type="int">
+                <column name="emp_no"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="employees.Departments" fetch="select" insert="false" name="departments" update="false">
+            <column length="4" name="dept_no" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="employees.Employees" fetch="select" insert="false" name="employees" update="false">
+            <column name="emp_no" not-null="true"/>
+        </many-to-one>
+        <property name="fromDate" type="date">
+            <column length="10" name="from_date" not-null="true"/>
+        </property>
+        <property name="toDate" type="date">
+            <column length="10" name="to_date" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

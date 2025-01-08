@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 9 dic 2024, 20:33:31 by Hibernate Tools 6.3.2.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="proyecto_orm" name="entities2.Sede" optimistic-lock="none" table="sede">
+        <id name="idSede" type="java.lang.Integer">
+            <column name="id_sede"/>
+            <generator class="identity"/>
+        </id>
+        <property name="nomSede" type="string">
+            <column length="40" name="nom_sede" not-null="true"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="departamentos" table="departamento">
+            <key>
+                <column name="id_sede" not-null="true"/>
+            </key>
+            <one-to-many class="entities2.Departamento"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="proyectoSedes" table="proyecto_sede">
+            <key>
+                <column name="id_sede" not-null="true"/>
+            </key>
+            <one-to-many class="entities2.ProyectoSede"/>
+        </set>
+    </class>
+</hibernate-mapping>
