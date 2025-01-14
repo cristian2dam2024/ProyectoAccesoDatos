@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 8 ene 2025, 1:26:37 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="employees" name="ejercicioNavidad_clases.Salaries" optimistic-lock="none" table="salaries">
+        <composite-id class="ejercicioNavidad_clases.SalariesId" name="id">
+            <key-property name="empNo" type="int">
+                <column name="emp_no"/>
+            </key-property>
+            <key-property name="fromDate" type="date">
+                <column length="10" name="from_date"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="ejercicioNavidad_clases.Employees" fetch="select" insert="false" name="employees" update="false">
+            <column name="emp_no" not-null="true"/>
+        </many-to-one>
+        <property name="salary" type="int">
+            <column name="salary" not-null="true"/>
+        </property>
+        <property name="toDate" type="date">
+            <column length="10" name="to_date" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

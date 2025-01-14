@@ -1,0 +1,45 @@
+package entities;
+
+import jakarta.persistence.*;
+import java.math.BigDecimal;
+
+import org.hibernate.annotations.Cascade;
+
+@Entity
+@Table(name = "empleado_datos_prof")
+public class EmpleadoDatosProf {
+    @Id
+    @Column(name = "dni", nullable = false, length = 9)
+    private String dni;
+
+    @Column(name = "categoria", nullable = false, length = 2)
+    private String categoria;
+
+    @Column(name = "sueldo_bruto_anual", precision = 8, scale = 2)
+    private BigDecimal sueldoBrutoAnual;
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public BigDecimal getSueldoBrutoAnual() {
+        return sueldoBrutoAnual;
+    }
+
+    public void setSueldoBrutoAnual(BigDecimal sueldoBrutoAnual) {
+        this.sueldoBrutoAnual = sueldoBrutoAnual;
+    }
+
+}
